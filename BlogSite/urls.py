@@ -9,5 +9,7 @@ urlpatterns = [
     path('',views.index,name="main"),
     path('blog/',include('blog.urls')),
     path('chat/',include('chat.urls')),
+    path('login/',views.login,name="Login"),
+    path('signin/',views.signin,name="Signin"),
     path('videochat/',include('videochat.urls')),
 ]
