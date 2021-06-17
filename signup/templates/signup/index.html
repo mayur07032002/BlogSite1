@@ -9,5 +9,15 @@
 <body>
     <p>Hello</p>
     <p>This is Sign Up main.</p>
+    <form method="post" action="/signin/sign/"> {% csrf_token %}
+        <input type="text" name="fname" id="fname" placeholder="First name">
+        <input type="text" name="lname" id="lname" placeholder="Last name">
+        <input type="email" name="email" id="email" placeholder="Email ID">
+        <input type="text" name="user" id="user" placeholder="User name">
+        <input type="text" name="password" id="password" placeholder="Password">
+
+        <button type="submit">Signup</button>
+    </form>
+    
 </body>
 </html>

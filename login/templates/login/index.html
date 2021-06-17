@@ -9,5 +9,10 @@
 <body>
     <h2>Hello</h2>
     <p>This is login main.</p>
+    <form method="post" action="/login/login/">{% csrf_token %}
+        <input type="text" name="user" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <button type="submit">Login</button>
+    </form>
 </body>
 </html>
