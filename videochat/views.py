@@ -2,4 +2,4 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("This is videochat!!")
+    return render(request,'videochat/index.html')
