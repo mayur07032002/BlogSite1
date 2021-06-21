@@ -27,14 +27,22 @@ def login(request):
     user = request.POST.get('user')
     password = request.POST.get('password')
     print(user,password)
-
+    mydb = mysql.connector.connect(
+      host="localhost",
+      user="root",
+      password="",
+      database="mydatabase"
+    )
+    mycursor = mydb.cursor()
     query = "SELECT * FROM signup"
     
     mycursor.execute(query)
     results = mycursor.fetchall()
 
     flag = False
+    print(results)
     for i in results:
+      print(i[4],i[5])
       if i[4]==user:
         if i[5]==password:
           flag = True

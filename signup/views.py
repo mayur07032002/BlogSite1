@@ -32,7 +32,7 @@ def sign(request):
     global data 
     data = [fname, lname, email, user, password]
 
-    if(verify(email)):
+    if(verify(email, user)):
       # sender = "blogsiteforum@gmail.com"
       # password = "Blogsite@2021"
       reciever = email
@@ -64,13 +64,13 @@ def sign(request):
     return HttpResponse("Email already exists!!")
 
 
-def verify(email):
+def verify(email, user):
     query = "SELECT * FROM signup"
     mycursor.execute(query)
     results = mycursor.fetchall()
 
     for result in results:
-      if result[3]==email:
+      if result[3]==email or result[4]==user:
         return False
     return True
 
