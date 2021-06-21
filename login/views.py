@@ -44,10 +44,7 @@ def login(request):
     results = mycursor.fetchall()
 
     flag = False
-    print(results)
     for i in results:
-      print(i)
-      print(i[4],i[5])
       if i[4]==user:
         if i[5]==password:
           flag = True
@@ -56,8 +53,8 @@ def login(request):
         else:
           return HttpResponse("Invalid Password.")
 
-      if flag==False:
-        return HttpResponse("Invalid Username.")
+    if flag==False:
+      return HttpResponse("Invalid Username.")
     
 
 def change(request):
@@ -83,8 +80,6 @@ def send_code(request):
 
 def verify(request):
     code_entered = request.POST.get('code')
-    print(code_entered,code_generated)
-    print(type(code_entered),type(code_generated))
     if code_entered == str(code_generated):
       return render(request, 'login/reset.html')
     else:
@@ -93,7 +88,6 @@ def verify(request):
 def reset(request):
     new_user = request.POST.get('user')
     new_password = request.POST.get('password')
-    print(new_user, new_password)
     query = "UPDATE signup SET user_name=%s , password=%s WHERE email_id=%s"
 
     mycursor.execute(query, [new_user, new_password,reciever])

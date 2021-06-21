@@ -33,16 +33,7 @@ def sign(request):
     data = [fname, lname, email, user, password]
 
     if(verify(email, user)):
-      # sender = "blogsiteforum@gmail.com"
-      # password = "Blogsite@2021"
       reciever = email
-
-     
-      # i=0
-      # while i<6:
-      #   num = random.randint(0,9)
-      #   send_code+=str(num)
-      #   i = i + 1
 
       send_code = random.randint(100000,999999)
       data.append(send_code)
@@ -53,12 +44,7 @@ def sign(request):
       
       message = "Subject:{}\n\n{}".format(subject, body)
 
-      # server = smtplib.SMTP('smtp.gmail.com', 587)
-      # server.starttls()
-      # server.login(sender,password)
-
       server.sendmail(sender, reciever, message)
-
 
       return render(request,'signup/verify.html')
     return HttpResponse("Email already exists!!")
