@@ -3,6 +3,7 @@ from django.http import HttpResponse
 import mysql.connector 
 import random
 import smtplib
+import datetime
 
 mydb = mysql.connector.connect(
   host="localhost",
@@ -20,6 +21,8 @@ server = smtplib.SMTP('smtp.gmail.com', 587)
 server.starttls()
 server.login(sender,password)
 code_generated = 0
+login_time = 0
+
 def index(request):
     return render(request,'login/index.html')
 
@@ -27,6 +30,7 @@ def login(request):
     user = request.POST.get('user')
     password = request.POST.get('password')
     print(user,password)
+
     mydb = mysql.connector.connect(
       host="localhost",
       user="root",
@@ -42,17 +46,19 @@ def login(request):
     flag = False
     print(results)
     for i in results:
+      print(i)
       print(i[4],i[5])
       if i[4]==user:
         if i[5]==password:
           flag = True
-          return HttpResponse("Login Successful!!")
+          entry_database(i[4], i[5])
+          return render(request, 'index.html',{'name':user})
         else:
           return HttpResponse("Invalid Password.")
 
       if flag==False:
         return HttpResponse("Invalid Username.")
-    return HttpResponse("Ok.")
+    
 
 def change(request):
     return render(request, 'login/change_user.html')
@@ -95,6 +101,16 @@ def reset(request):
     mydb.commit()
     return render(request, 'login/index.html')
    
+
+def logout(request):
+  return render(request, 'index.html')
+
+def entry_database(user, password):
+  query = "INSERT INTO login_data(username, password, time_stamp) VALUES (%s, %s, %s)"
+  mycursor.execute(query, [user, password, datetime.datetime.now()])
+  mydb.commit()
+  return 
+
 
 
 

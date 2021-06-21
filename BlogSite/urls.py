@@ -10,6 +10,7 @@ urlpatterns = [
     path('blog/',include('blog.urls')),
     path('chat/',include('chat.urls')),
     path('login/',include('login.urls')),
+    path('logout/',views.index,name="logout"),
     path('signin/',include('signup.urls')),
     path('videochat/',include('videochat.urls')),
 ]

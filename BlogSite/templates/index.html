@@ -57,8 +57,14 @@
       <a class="nav-link" href="/videochat">Video Chat</a>
       <a class="nav-link" href="#">About Us</a>
       <a class="nav-link" href="#">Contact Us</a>
+      {% if name is None %}
       <a class="nav-link" href="/signin">Sign Up</a>
       <a class="nav-link" href="/login">Login</a>
+      {% else %}
+      <span class="nav-link">Welcome!! {{name}}</span>
+        <a class="nav-link" href="/logout">Logout</a>
+      {% endif %}
+
     </nav>
   </div>
 </header>
