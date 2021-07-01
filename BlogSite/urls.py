@@ -6,10 +6,12 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index,name="main"),
+    path('',views.log,name="main"),
+    # path('l1/',views.log,name="main"),
     path('blog/',include('blog.urls')),
     path('chat/',include('chat.urls')),
     path('login/',include('login.urls')),
-    path('signin/',include('signup.urls')),
+    path('logout/',views.index,name="logout"),
+    path('signup/',include('signup.urls')),
     path('videochat/',include('videochat.urls')),
 ]

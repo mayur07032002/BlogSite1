@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <h3>This is reset page</h3>
+    <form action="/login/reset/" method="post">{% csrf_token %}
+        <input name="user" placeholder="Enter new username" id="name">
+        <input name="password" placeholder="Enter new password" id="password">
+
+        <button type="submit">Change it!!</button>
+    </form>
+{% endblock %}
