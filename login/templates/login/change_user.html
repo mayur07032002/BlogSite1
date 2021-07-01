@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    
+    <h3>This is forgot username page</h3>
+    <form action="/login/sendcode/" method="post">{% csrf_token %}
+        <input type="text" placeholder="Enter your email" name="email">
+        <button type="submit">Send Code</button>
+    </form>
+
+{% endblock %}
