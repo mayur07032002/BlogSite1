@@ -407,7 +407,7 @@ h1, h2, h3, h4, h5, h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/about.jpg") top right;
+  background: url("../img/hero.jpg") top right;
   background-size: cover;
 }
 
@@ -1258,6 +1258,8 @@ section {
   color: #222222;
   font-size: 14px;
   text-align: center;
+  position: absolute;
+  
 }
 
 #footer .credits {

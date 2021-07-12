@@ -25,7 +25,7 @@ code_generated = 0
 login_time = 0
 
 def index(request):
-    return render(request,'login/index.html')
+    return render(request,'login.html')
 
 def login(request):
     user = request.POST.get('user')

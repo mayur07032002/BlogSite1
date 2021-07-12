@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Verify{% endblock title %}
+{% block body %}
+<div  style="background-image: url('assets/img/hero-bg.jpg');width: 100%; height: 100vh;background-size: cover;" class="php-email-form">
+ <main id="main" >
+ <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+        <div class="php-email-form">
+          <h2>Verification</h2>
+          <p>Please Enter OTP sent To your email id </p>
+          <form action="/signin/verify/" method="post">{% csrf_token %}
+        <input class="form-control" style = "width:300px;margin-left: auto;margin-right: auto;"type="text" placeholder="Enter your code here" name="code" id="code"><br>
+        <button type="submit">Verify</button>
+        </form>
+        </div>
+        </div>  
+      </div>
+ </section>
+ </main>
+</div>
+{% endblock body %}

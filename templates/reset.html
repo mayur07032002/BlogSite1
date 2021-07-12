@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}reset{% endblock title %}
+{% block body %}
+<div  style="background-image: url('assets/img/hero-bg.jpg');width: 100%; height: 100vh;background-size: cover;" class="php-email-form">
+ <main id="main" >
+ <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title">
+          <h2>Reset</h2>
+          <p>Enter details to below to reset it </p>
+           <form action="/login/reset/" method="post">{% csrf_token %}
+        <input class="form-control" style = "width:300px;margin-left: auto;margin-right: auto;" name="user" placeholder="Enter new username" id="name">
+        <input class="form-control my-2" style = "width:300px;margin-left: auto;margin-right: auto;" name="password" placeholder="Enter new password" id="password">
+        <button style=" background: #34b7a7;border: 0;margin-bottom: 20px;padding: 10px 30px 12px 30px;color: #fff;transition: 0.4s;border-radius: 50px;" type="submit":hover>Change it!!</button>
+    </form>
+        </div>  
+      </div>
+ </section>
+ </main>
+</div>
+{% endblock body %}
