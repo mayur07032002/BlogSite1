@@ -1,59 +1,86 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import login, logout, authenticate
 import mysql.connector
 import datetime
+import random
+import smtplib
+
+data = []
+code_generated = 0
+sender = "blogsiteforum@gmail.com"
+password = "Blogsite@2021"
+server = smtplib.SMTP('smtp.gmail.com', 587)
+server.starttls()
+server.login(sender, password)
+
+
 def index(request):
-    return render(request,'index.html',{'name':None})
+    return render(request, 'index.html', {'name': None})
 
-    
 
-def login(request):
-    return render(request,'login.html')
+def __login__(request):
+    if request.method == 'POST':
+        loginusername = request.POST.get('username')
+        loginpassword = request.POST.get('password')
+        user = authenticate(username=loginusername, password=loginpassword)
+        if user is not None:
+            login(request,user)
+            messages.success(request,"Login Successful!!")
+            return redirect('main')
+        else:
+            return HttpResponse("Noi")
+    return render(request, 'login.html')
+
 
 def signin(request):
-    return render(request,'sign_index.html')
+    return render(request, 'sign.html')
 
 
-def entry_database(user, password):
-    mydb = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="mydatabase"
-    )
-    mycursor = mydb.cursor()
-    query = "INSERT INTO login_data(username, password, time_stamp) VALUES (%s, %s, %s)"
-    mycursor.execute(query, [user, password, datetime.datetime.now()])
-    mydb.commit()
-    return 
+def verify_code(request):
+    if request.method == 'POST':
+        code_recieved = request.POST.get('code')
+        if str(code_generated) == code_recieved:
+            newuser = User.objects.create_user(data[3], data[2], data[4])
+            newuser.first_name = data[0]
+            newuser.last_name = data[1]
+            newuser.save()
+            return redirect('main')
+    return HttpResponse("verify")
 
-def log(request):
+
+def sendcode(request):
+    fname = request.POST.get('fname')
+    lname = request.POST.get('lname')
+    email = request.POST.get('email')
     user = request.POST.get('user')
     password = request.POST.get('password')
-    if user==None and password==None:
-        return render(request,'index.html',{'name':None})
+    global data
+    data = [fname, lname, email, user, password]
 
-    mydb = mysql.connector.connect(
-      host="localhost",
-      user="root",
-      password="",
-      database="mydatabase"
-    )
-    mycursor = mydb.cursor()
-    query = "SELECT * FROM signup"
-    
-    mycursor.execute(query)
-    results = mycursor.fetchall()
+    # if(verify(email, user)):
+    reciever = email
 
-    flag = False
-    for i in results:
-      if i[4]==user:
-        if i[5]==password:
-          flag = True
-          entry_database(i[4], i[5])
-          return render(request, 'index.html',{'name':user,'flag':flag})
-        else:
-          return HttpResponse("Invalid Password.")
+    send_code = random.randint(100000, 999999)
+    data.append(send_code)
+    global code_generated
+    code_generated = send_code
 
-    if flag==False:
-      return HttpResponse("Invalid Username.")
+    subject = "Email Verification Process."
+    body = "Hello!! " + fname + " " + lname + \
+        "\nThis is Email verification process for sign up.\nPlease enter OTP given below on site\n OTP : " + \
+        str(send_code)
+
+    message = "Subject:{}\n\n{}".format(subject, body)
+
+    server.sendmail(sender, reciever, message)
+
+    return render(request, 'verify.html')
+    # return HttpResponse("Email already exists!!")
+    # return HttpResponse("Sending Code")
+
+def __logout__(request):
+    logout(request)
+    return redirect('main')
