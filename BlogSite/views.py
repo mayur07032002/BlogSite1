@@ -31,7 +31,8 @@ def __login__(request):
             messages.success(request,"Login Successful!!")
             return redirect('main')
         else:
-            return HttpResponse("Noi")
+            messages.warning(request,"Invalid Credentials.")
+            return redirect('login')
     return render(request, 'login.html')
 
 
@@ -83,4 +84,15 @@ def sendcode(request):
 
 def __logout__(request):
     logout(request)
+    messages.success(request,"Logout Successful!!")
     return redirect('main')
+
+def change_user(request):
+    return HttpResponse("Change username")
+
+
+def change_pass(request):
+    return HttpResponse("Change password")
+
+def about(request):
+    return render(request,'about.html')

@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import Post
+from django.contrib import messages
 import random
 def index(request):
     if request.method=='POST':
@@ -26,10 +27,10 @@ def write(request):
         title=request.POST.get('title')
         slug=str(random.randint(100,1000000))
         content=request.POST.get('content')
-        print(content)
         author=request.user.username
         post=Post(author=author ,title=title,slug=slug,content=content)
         post.save()
+        messages.success(request,"Blog posted successfully.")
         return redirect("BlogHome")
     else:
         return render(request,'writeblog.html')

@@ -6,16 +6,17 @@
 
     <main id="main">
         <section>
-            <form action="/blog/" method="post">{% csrf_token %}
-                <input type="text " placeholder="Search blogs" name="search" id="name">
+            <form action="/blog/" method="post" style="text-align:center;">{% csrf_token %}
+                <input type="text " placeholder="Search blogs" name="search" id="name" style="text-align:center;">
                 <button type="submit">Search</button>
             </form>
             <a href="/blog/writeblog">Write your own blog</a>
+            <h2>Popular Blogs</h2>
             {% for post in posts %}
                 <div class="container2">
                 <h2>{{post.title}}</h2>
                 <h3>{{post.author}}</h3>
-
+                <h4>Posted on {{post.timestamp}}</h4>
                 <p>{{post.content | safe}}</p>
 
                 <a href="/blog/{{post.slug}}">Read complete blog</a>
