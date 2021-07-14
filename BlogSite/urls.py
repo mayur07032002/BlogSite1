@@ -5,12 +5,20 @@ from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
+    path('change_user/',views.change_user,name="changeuser"),
+    path('change_pass/',views.change_pass,name="changepass"),
+    path('sendcode/',views.sendcode,name="sendcode"),
+    path('verify_code/',views.verify_code,name="verify_code"),
+    path('login/',views.__login__,name="login"),
+    path('logout/',views.__logout__,name="logout"),
+    path('signup/',views.signin,name="signup"),
+    path('about/',views.about,name="about"),
     path('admin/', admin.site.urls),
     path('',views.index,name="main"),
+
+    #Application urls included here
     path('blog/',include('blog.urls')),
     path('chat/',include('chat.urls')),
-    path('login/',include('login.urls')),
-    path('logout/',views.index,name="logout"),
-    path('signin/',include('signup.urls')),
+    path('contact/',include('contact.urls')),
     path('videochat/',include('videochat.urls')),
 ]

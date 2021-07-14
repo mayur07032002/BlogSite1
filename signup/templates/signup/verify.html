@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block body %}
-{% load static %}
-    <h2>Code has been sent to your entered email id </h2>
-    <form action="/signin/verify/" method="post">{% csrf_token %}
-        <input type="text" placeholder="Enter your code here" name="code" id="code">
-        <button type="submit">Verify</button>
-    </form>
-{% endblock %}

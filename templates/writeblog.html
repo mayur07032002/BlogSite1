@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://cdn.tiny.cloud/1/3ei62kpkjjbchj1zw3ofu7zrmy3vdubjkpzq0uln17a50lps/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
+  <script>
+    tinymce.init({
+      selector: '#mytextarea',
+      plugins: [
+        'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+        'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+        'table emoticons template paste help'
+      ],
+      toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+        'bullist numlist outdent indent | link image | print preview media fullpage | ' +
+        'forecolor backcolor emoticons | help',
+      menu: {
+        favs: { title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons' }
+      },
+      menubar: 'favs file edit view insert format tools table help',
+      content_css: 'css/content.css'
+    });
+
+    bt.addEventListener('click', (e) => {
+      myHTML.innerHTML = tinymce.get('mytextarea').getContent()
+    });
+
+  </script>
+
+  <link href="{% static 'assets/img/favicon.png' %}" rel="icon">
+  <link href="{% static 'assets/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!--Main CSS File-->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+</head>
+<header id="header" class="fixed-top">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+
+    <h1 class="logo me-auto me-lg-0"><a href="index.html">BlogSite</a></h1>
+    <!-- Uncomment below if you prefer to use an image logo -->
+    <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        {% if flag %}
+        <li><a href="#">Home</a></li>
+        {% else %}
+        <li><a href="/">Home</a></li>
+        {% endif %}
+        <li><a href="/blog">Blogs</a> </li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="/chat">Chat</a></li>
+        <li><a href="/videochat">Video Chat</a></li>
+        <li><a href="/contact">Contact</a></li>
+        {% if user.is_authenticated %}
+        <div class="dropdown  " style="margin-left: 30px;">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Welcome !! {{request.user}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </div>
+        {% else %}
+        <li><a href="/signup">Signup</a></li>
+        <li><a href="/login">Login</a></li>
+        {% endif %}
+
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+  </div>
+
+</header>
+<main id="main">
+  <section>
+
+    <body>
+
+      <div class="container">
+        {% if user.is_authenticated %}
+          <form method="post" action="/blog/writeblog/">{% csrf_token %}
+          <h2>Title</h2>
+          <input type="text" placeholder="Title of your blog" style="margin-bottom:30px; width: 500px;" name="title">
+          <h3>Content</h3>
+          <textarea id="mytextarea" name="content" style="height:500px;"
+            placeholder="Content of your blog here"></textarea>
+          <button type="submit">Post</button>
+        </form>
+
+        {% else %}
+
+          <a href="/login/">Please Login First to Write Blog</a>
+        {% endif %}
+        
+      </div>
+      <div id="myHTML"></div>
+
+    </body>
+  </section>
+</main>
+</html>
