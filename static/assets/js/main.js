@@ -6,7 +6,9 @@
 */
 
 
-
+function op(){
+  console.log("kjjbcrj");
+}
 
 function showpass() {
   var x = document.getElementById("pswd");
