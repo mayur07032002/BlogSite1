@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Contact
-
+from django.contrib import messages
 
 def index(request):
     if request.method == 'POST':
@@ -11,6 +11,7 @@ def index(request):
         message = request.POST.get('message')
         contact = Contact(name=name, email=email, subject=subject, message=message)
         contact.save()
-        return render(request, 'index.html')
+        messages.info(request,"Message sent successfully")
+        return render(request,'index.html')
     else:
         return render(request, 'contact.html')
