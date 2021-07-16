@@ -41,13 +41,15 @@ def signin(request):
 
 
 def verify_code(request):
-    if request.method == 'POST':
+    if request.method=='POST':
         code_recieved = request.POST.get('code')
+        print(code_recieved)
         if str(code_generated) == code_recieved:
             newuser = User.objects.create_user(data[3], data[2], data[4])
             newuser.first_name = data[0]
             newuser.last_name = data[1]
             newuser.save()
+            messages.success(request,"Signed up successfully!!")
             return redirect('main')
     return HttpResponse("verify")
 
@@ -60,15 +62,11 @@ def sendcode(request):
     password = request.POST.get('password')
     global data
     data = [fname, lname, email, user, password]
-
-    # if(verify(email, user)):
     reciever = email
-
     send_code = random.randint(100000, 999999)
     data.append(send_code)
     global code_generated
     code_generated = send_code
-
     subject = "Email Verification Process."
     body = "Hello!! " + fname + " " + lname + \
         "\nThis is Email verification process for sign up.\nPlease enter OTP given below on site\n OTP : " + \
@@ -77,10 +75,7 @@ def sendcode(request):
     message = "Subject:{}\n\n{}".format(subject, body)
 
     server.sendmail(sender, reciever, message)
-
     return render(request, 'verify.html')
-    # return HttpResponse("Email already exists!!")
-    # return HttpResponse("Sending Code")
 
 def __logout__(request):
     logout(request)
