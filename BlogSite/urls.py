@@ -15,7 +15,7 @@ urlpatterns = [
     path('about/',views.about,name="about"),
     path('admin/', admin.site.urls),
     path('',views.index,name="main"),
-
+ 
     #Application urls included here
     path('blog/',include('blog.urls')),
     path('chat/',include('chat.urls')),
