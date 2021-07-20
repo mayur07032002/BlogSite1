@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^#2x8ur&9m(5j*(4r_4x+!0(8zvsuaf)ldf-jiu)cvuwnhris#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1','devcenter.heroku.com']
+ALLOWED_HOSTS = ['127.0.0.1','.heroku.com']
 
 
 # Application definition
@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'blogsite_database',
         'USER':'root',
         'PASSWORD':'',
-        'HOST':'localhost',
+        'HOST':'127.0.0.1',
         'PORT':'3366'
     }
 }
