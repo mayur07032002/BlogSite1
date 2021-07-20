@@ -42,14 +42,13 @@ def signin(request):
 def verify_code(request):
     if request.method=='POST':
         code_recieved = request.POST.get('code')
-        print(code_recieved)
         if str(code_generated) == code_recieved:
             newuser = User.objects.create_user(data[3], data[2], data[4])
             newuser.first_name = data[0]
             newuser.last_name = data[1]
             newuser.save()
             messages.success(request,"Signed up successfully!!")
-            return redirect('main')
+            return redirect('login')
     return HttpResponse("verify")
 
 

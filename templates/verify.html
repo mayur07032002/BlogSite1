@@ -12,15 +12,10 @@
             <p>Please Enter OTP sent To your email id </p>
              <form action="/verify_code/" method="post">{% csrf_token %}
               <input class="form-control" style="width:300px;margin-left: auto;margin-right: auto;" type="text" placeholder="Enter your code here" name="code" id="code"><br>
-              <button type="submit">Verify1</button>
+              <button type="submit">Verify</button>
             </form> 
          
         </div>
-      </div> 
-        {% comment %} <form action="/verify_code/" method="post">{% csrf_token %}
-    <input type="text" placeholder="Code Here" id="code" name="code">
-    <button type="submit">Submit</button>
-  </form> {% endcomment %}
     </section>
   </main>
 

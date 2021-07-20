@@ -24,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^#2x8ur&9m(5j*(4r_4x+!0(8zvsuaf)ldf-jiu)cvuwnhris#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','.heroku.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -81,12 +82,8 @@ WSGI_APPLICATION = 'BlogSite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blogsite_database',
-        'USER':'root',
-        'PASSWORD':'',
-        'HOST':'127.0.0.1',
-        'PORT':'3366'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
