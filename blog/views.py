@@ -40,7 +40,7 @@ def write(request):
 
 
 def viewblog(request, slug):
-    post = Post.objects.filter(slug=slug)[0]
+    post = Post.objects.filter(slug=slug).first()
     comments=Comments.objects.filter(post=post)
     return render(request, 'blogpost.html', {'post': post,'comments':comments})
 
