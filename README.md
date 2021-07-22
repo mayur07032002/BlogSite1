@@ -1,2 +1,4 @@
-This is a Blogging website created using Django and Mysql database.
-It also has email verification process for signup and forgot password
+This is a Blogging website created using Django.
+Website is live on https://blogsitehmpro1.herokuapp.com
+
+Rich Text Editor is also there for making user writing experience good.
