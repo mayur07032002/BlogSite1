@@ -5,15 +5,11 @@ from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 import datetime
 import random
-import smtplib
+
 
 data = []
 code_generated = 0
-sender = "blogsiteforum@gmail.com"
-password = "Blogsite@2021"
-server = smtplib.SMTP('smtp.gmail.com', 587)
-server.starttls()
-server.login(sender, password)
+
 
 
 def index(request):
@@ -49,7 +45,7 @@ def verify_code(request):
             newuser.save()
             messages.success(request,"Signed up successfully!!")
             return redirect('login')
-    return HttpResponse("verify")
+    return redirect('login')
 
 
 def sendcode(request):
@@ -60,20 +56,12 @@ def sendcode(request):
     password = request.POST.get('password')
     global data
     data = [fname, lname, email, user, password]
-    reciever = email
-    send_code = random.randint(100000, 999999)
-    data.append(send_code)
-    global code_generated
-    code_generated = send_code
-    subject = "Email Verification Process."
-    body = "Hello!! " + fname + " " + lname + \
-        "\nThis is Email verification process for sign up.\nPlease enter OTP given below on site\n OTP : " + \
-        str(send_code)
-
-    message = "Subject:{}\n\n{}".format(subject, body)
-
-    server.sendmail(sender, reciever, message)
-    return render(request, 'verify.html')
+    newuser = User.objects.create_user(data[3], data[2], data[4])
+    newuser.first_name = data[0]
+    newuser.last_name = data[1]
+    newuser.save()
+    messages.success(request,"Signed up successfully!!")
+    return redirect('login')
 
 def __logout__(request):
     logout(request)
