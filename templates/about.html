@@ -1,15 +1,72 @@
 {% extends 'base.html' %}
 {% block title %}About Us{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+{% endblock style %}
 {% block body %}
-<div style="background-image: url('../static/assets/img/hero.jpg') ;width: 100%; height: 100vh;background-size: cover;">
+ 
+<div style="background-image: url('../static/assets/img/hero.jpg') ;width: 100%; height: 100%;background-size: cover;" >
  <main id="main" >
- <section id="about" class="about">
- <p style="text-align: center;"><strong>Blogsite</strong> is a blogging website specially created for beginers bloggers.<br>It has a very simple interface for writing and posting blog.</p>
- <h5 style="text-align: center;">Find us on Google Maps</h5>
-      <div class="loc">
-            <iframe style="border:0; width: 100%; height: 270px; align-items:center;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253956.41501509747!2d79.0633709894187!3d21.255101308188188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd4c0a5a31faf13%3A0x19b37d06d0bb3e2b!2sNagpur%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1624435523469!5m2!1sen!2sin" frameborder="0" allowfullscreen="" loading="lazy"></iframe>
-        </div> 
-        <a href="/contact/" class="cl">Contact Us</a>
+ <section id="contact" class="contact">
+
+<div class="container" data-aos="fade-up" style="margin-top: 0%;">
+<div class="row" >
+<div class="section-title">
+ <h2>About</h2>
+ </div>
+<p style="text-align: center;"><strong>Blogsite</strong> is a blogging website specially created for beginers bloggers.<br>It has a very simple interface for writing and posting blog.</p>
+<div class="card" style="margin-top: 20px;">
+  <img src="../static/assets/img/profile.png" alt="John" style="width:100%">
+  <h1>Mayur</h1>
+  <p class="title">CEO & Founder, Example</p>
+  <p><button>Linkedin</button></p>
+</div><br><br>
+
+<div class="card" style="margin-top: 20px;">
+  <img src="../static/assets/img/profile.png" alt="John" style="width:100%">
+  <h1>Hardik</h1>
+  <p class="title">CEO & Founder, Example</p>
+  <p><button>Linkedin</button></p>
+</div>
+</div>
+</div>
  </section>
  </main>
 </div>

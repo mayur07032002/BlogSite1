@@ -1,23 +1,27 @@
 {% extends 'base.html' %}
 {% block title %}Signin{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="../static/assets/css/style1.css">
+{% endblock style %}
 {% block body %}
-<div style="background-image: url('../static/assets/img/hero.jpg') ;width: 100%; height: 100vh;background-size: cover;" >
+
     <main id="main">
         <section id="about" class="about">
-            <div class="container" data-aos="fade-up">
-                <div class="section-title">
+            <div class="contentbx" data-aos="fade-up">
+                    <div class="formbx">
+                    <h2>Signin </h2><br>
                    <form action="/sendcode/" method="post">{% csrf_token %}
-                    <h3>Enter Details below to signup</h3>
-                    <div class="container1"><input type="text" placeholder="First Name" id="fname" name="fname"></div>
-                    <div class="container1"><input type="text" placeholder="Last Name" id="lname" name="lname"></div>
-                    <div class="container1"><input type="email" placeholder="Email ID" id="email" name="email"></div>
-                    <div class="container1"><input type="text" placeholder="Username" id="user" name="user"></div>
-                    <div class="container1"><input type="password" placeholder="Password" id="pswd" name="password"></div>
-                    <input type="checkbox" onclick="showpass()">Show Password
+                    
+                    <div class="inputbx"><input type="text" placeholder="First Name" id="fname" name="fname"></div>
+                    <div class="inputbx"><input type="text" placeholder="Last Name" id="lname" name="lname"></div>
+                    <div class="inputbx"><input type="email" placeholder="Email ID" id="email" name="email"></div>
+                    <div class="inputbx"><input type="text" placeholder="Username" id="user" name="user"></div>
+                    <div class="inputbx"><input type="password" placeholder="Password" id="pswd" name="password"></div>
 
-                    <div class="container1"><button type="submit" onclick="showme()" id="verify" style="background-color: rgb(91, 91, 105); color: white;">Register</button>
-                    </div>
-                    <div class="container1">Already have an account ?  <a href="/login/">Login</a> </div>
+                    <div class="inputbx">
+                        <input type="submit" value="Signin">
+                      </div>
+                    <div class="inputbx"><p>Already have an account ?  <a href="/login/">Login</a></p> </div>
                 </form>
                 </div>
             </div>
