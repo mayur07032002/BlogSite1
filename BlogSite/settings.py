@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-#import django_heroku
+import django_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -72,7 +72,7 @@ TEMPLATES = [
     },
 ]
 
-#WSGI_APPLICATION = 'BlogSite.wsgi.application'
+WSGI_APPLICATION = 'BlogSite.wsgi.application'
 
 
 # Database
@@ -138,4 +138,4 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR,'assets/')
 
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
